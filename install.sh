@@ -5,13 +5,6 @@ set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# If script is executed as an unprivileged user
-# Execute it as superuser, preserving environment variables
-if [ $EUID != 0 ]; then
-    sudo -E "$0" "$@"
-    exit $?
-fi
-
 # Install required packages
 /usr/bin/apt update -y
 /usr/bin/apt install -y autotools-dev \
@@ -54,8 +47,8 @@ ln -s $SCRIPT_DIR/configs/sniproxy.conf /etc/sniproxy.conf
 rm -f /etc/default/sniproxy
 
 # Set the service to run at boot
-/bin/systemctl enable sniproxy
+#/bin/systemctl enable sniproxy
 
 # Start sniproxy
-/bin/systemctl start sniproxy
+#/bin/systemctl start sniproxy
 
